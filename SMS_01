@@ -1,0 +1,34 @@
+import uiautomator2 as ui2
+import time
+import subprocess
+
+# Connect to the devices
+receiver_device_serial = "192.168.168.16:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+time.sleep(2)
+receiver_device(text="Messages").click()
+time.sleep(2)
+receiver_device(text="Start chat").click()
+time.sleep(2)
+receiver_device(text="AAAAA").click()
+time.sleep(2)
+receiver_device(text="Mobile+91 84486 97488").click()
+time.sleep(2)
+receiver_device(resourceId="com.google.android.apps.messaging:id/compose_message_text").set_text("hellothisis shubham")
+time.sleep(2)
+receiver_device(resourceId="com.google.android.apps.messaging:id/send_message_button_container").click()
+time.sleep(2)
+# Check if the message is sent
+message_sent = False
+if receiver_device(resourceId="com.google.android.apps.messaging:id/status_icon").exists():
+    # Sent indicator is found, message is sent
+    message_sent = True
+else:
+    # Sent indicator is not found, message is not sent
+    message_sent = False
+
+# Print the result
+if message_sent:
+    print("Message sent successfully!")
+else:
+    print("Failed to send message.")
