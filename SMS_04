@@ -1,0 +1,45 @@
+import uiautomator2 as ui2
+import time
+import subprocess
+
+# Connect to the devices
+receiver_device_serial = "192.168.168.16:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+time.sleep(2)
+receiver_device(text="Messages").click()
+time.sleep(2)
+receiver_device(text="Shubham").click()
+time.sleep(2)
+receiver_device(text="RCS message").click()
+time.sleep(2)
+receiver_device.xpath('//*[@content-desc="Settings"]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]/android.widget.ImageView[1]').click()
+time.sleep(2)
+receiver_device(text="Languages").click()
+time.sleep(2)
+receiver_device(text="Add keyboard").click()
+time.sleep(2)
+receiver_device(text="Hindi (India)").click()
+time.sleep(2)
+receiver_device(resourceId="com.google.android.inputmethod.latin:id/0_resource_name_obfuscated", text="Hindi")
+time.sleep(2)
+receiver_device(text="Done").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.google.android.inputmethod.latin:id/key_pos_switch_to_next_language").click()
+time.sleep(2)
+receiver_device(resourceId="com.google.android.inputmethod.latin:id/key_pos_switch_to_next_language").click()
+time.sleep(2)
+receiver_device.xpath('//*[@resource-id="com.google.android.inputmethod.latin:id/key_pos_1_0"]/android.widget.TextView[1]').click()
+time.sleep(2)
+receiver_device.xpath('//*[@resource-id="com.google.android.inputmethod.latin:id/key_pos_1_1"]/android.widget.TextView[1]').click()
+time.sleep(2)
+receiver_device.xpath('//*[@resource-id="com.google.android.inputmethod.latin:id/key_pos_1_2"]/android.widget.TextView[1]').click()
+time.sleep(2)
+if receiver_device(resourceId="com.google.android.apps.messaging:id/compose_message_text",text="कखग").exists():
+    print("Message printed in hindi")
+else:
+    print("Message not printed in hindi")
+receiver_device.press("home")
