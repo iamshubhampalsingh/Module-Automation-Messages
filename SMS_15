@@ -1,0 +1,35 @@
+import uiautomator2 as ui2
+import time
+
+# Connect to the devices
+receiver_device_serial = "192.168.168.16:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+time.sleep(2)
+receiver_device(text="Messages").click()
+time.sleep(2)
+receiver_device(resourceId="com.google.android.apps.messaging:id/og_apd_internal_image_view").click()
+
+# Perform a long press on the button
+button = receiver_device(resourceId="com.google.android.apps.messaging:id/og_apd_internal_image_view")
+button.long_click()
+
+# Add a delay to allow time for the long press action to take effect
+time.sleep(2)
+
+# Navigate to the "Messages settings"
+receiver_device(text="Messages settings").click()
+time.sleep(2)
+
+# Scroll to the end of the screen
+receiver_device(scrollable=True).scroll.toEnd(steps=10)
+time.sleep(2)
+
+# Scroll to the beginning of the screen
+receiver_device(scrollable=True).scroll.toBeginning(steps=10)
+time.sleep(2)
+
+# Check if the "Settings" text is present on the screen
+if receiver_device(text="Settings").exists:
+    print("Setting page is open")
+else:
+    print("Setting page is not open")
