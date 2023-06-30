@@ -1,0 +1,69 @@
+import uiautomator2 as ui2
+import time
+import subprocess
+
+# Connect to the device
+receiver_device_serial = "192.168.168.16:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+
+# Pause for 2 seconds
+time.sleep(2)
+
+# Click on "Messages"
+receiver_device(text="Messages").click()
+
+# Pause for 2 seconds
+time.sleep(2)
+
+# Click on "Start chat"
+receiver_device(text="Start chat").click()
+
+# Pause for 2 seconds
+time.sleep(2)
+
+# Click on "AAAAA"
+receiver_device(text="AAAAA").click()
+
+# Pause for 2 seconds
+time.sleep(2)
+
+# Click on "Mobile+91 84486 97488"
+receiver_device(text="Mobile+91 84486 97488").click()
+
+# Pause for 2 seconds
+time.sleep(2)
+
+# Specify the XPath for the desired element
+element_xpath = '//*[@resource-id="com.google.android.inputmethod.latin:id/key_pos_bottom_symbol_1"]/android.widget.LinearLayout[1]/android.widget.ImageView[1]'
+
+# Perform a long press on the element
+element = receiver_device.xpath(element_xpath)
+element.long_click()
+
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(text="Text message").click()
+time.sleep(2)
+receiver_device.xpath('//*[@content-desc="Settings"]/android.widget.FrameLayout[1]/android.widget.FrameLayout[1]').click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="Dictionary").click()
+time.sleep(2)
+receiver_device(text="Personal dictionary").click()
+time.sleep(2)
+receiver_device(resourceId="android:id/title", text="All languages").click()
+time.sleep(2)
+receiver_device(resourceId="com.google.android.inputmethod.latin:id/0_resource_name_obfuscated").click()
+time.sleep(2)
+receiver_device(text="Type a word").set_text("Hello")
+time.sleep(2)
+receiver_device(text="Optional shortcut").set_text("Hi")
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.google.android.inputmethod.latin:id/0_resource_name_obfuscated", text="Hello")
+time.sleep(2)
+receiver_device(resourceId="com.google.android.inputmethod.latin:id/0_resource_name_obfuscated", description="Delete")
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/back").click()
+time.sleep(2)
+receiver_device(resourceId="com.android.systemui:id/center_group").click()
