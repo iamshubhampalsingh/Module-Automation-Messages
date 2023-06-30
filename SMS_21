@@ -1,0 +1,21 @@
+import uiautomator2 as ui2
+import time
+import subprocess
+
+# Connect to the devices
+receiver_device_serial = "192.168.168.16:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+time.sleep(2)
+turn_off_command = f"adb -s {receiver_device_serial} shell input keyevent 26"
+turn_on_command = f"adb -s {receiver_device_serial} shell input keyevent 224"
+time.sleep(2)
+subprocess.run(turn_on_command, shell=True, check=True)
+time.sleep(2)
+receiver_device.swipe(500, 1500, 500, 500)  # Adjust the swipe coordinates as needed
+time.sleep(2)
+receiver_device(text="Messages").click()
+time.sleep(2)
+if receiver_device(text="Shubham").exists():
+ print("Contacts are available")
+else:
+ print("Contacts are not available")
