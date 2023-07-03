@@ -1,0 +1,34 @@
+import uiautomator2 as ui2
+import time
+import subprocess
+
+# Connect to the device
+receiver_device_serial = "192.168.168.16:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+
+time.sleep(2)  # Wait for 2 seconds
+
+# Click on the "Messages" element
+receiver_device(text="Messages").click()
+time.sleep(2)  # Wait for 2 seconds
+
+# Click on the "Start chat" element
+receiver_device(text="Start chat").click()
+time.sleep(2)  # Wait for 2 seconds
+
+# Click on the "AAAAA" element
+receiver_device(text="AAAAA").click()
+time.sleep(2)  # Wait for 2 seconds
+
+# Click on the "Mobile+91 84486 97488" element
+receiver_device(text="Mobile+91 84486 97488").click()
+time.sleep(2)  # Wait for 2 seconds
+
+# Check if the "Gboard" element exists and print a message
+if receiver_device.xpath('//*[@resource-id="com.google.android.inputmethod.latin:id/key_pos_ime_action"]/android.widget.FrameLayout[1]'):
+    print("Enter key available")
+
+time.sleep(2)  # Wait for 2 seconds
+
+# Press the "home" button
+receiver_device.press("home")
