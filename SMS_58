@@ -23,6 +23,19 @@ time.sleep(2)
 receiver_device(text="Shubham").click()
 
 time.sleep(2)
+# Capture a screenshot
+screenshot = receiver_device.screenshot()
+
+# Get the color of a specific pixel on the screen
+pixel_color = screenshot.getpixel((100, 100))  # Change the coordinates as needed
+
+# Check if the screen is black (all RGB values are 0)
+if pixel_color == (0, 0, 0):
+    print("Screen is black")
+elif pixel_color == (255, 0, 0):  # Assuming red color is (255, 0, 0)
+    print("Screen is red")
+else:
+    print("Screen is neither black nor red")
 
 if receiver_device(resourceId="com.google.android.apps.messaging:id/message_lock_icon").exists():
     print("MESSAGE SENT WITHOUT ANY LAG")
