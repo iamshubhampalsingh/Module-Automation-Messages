@@ -1,0 +1,30 @@
+import uiautomator2 as ui2
+import time
+import subprocess
+
+# Connect to the device
+receiver_device_serial = "192.168.168.16:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+
+time.sleep(2)  # Wait for 2 seconds
+
+# Click on the "Messages" element
+receiver_device(text="Messages").click()
+time.sleep(2)  # Wait for 2 seconds
+
+# Click on the "Start chat" element
+receiver_device(text="Start chat").click()
+time.sleep(2)  # Wait for 2 seconds
+
+# Click on the "Shubham" element
+receiver_device.xpath('//android.widget.ScrollView').set_text("Shubham")
+time.sleep(2)
+
+receiver_device(text="Shubham").click()
+
+time.sleep(2)
+
+if receiver_device(resourceId="com.google.android.apps.messaging:id/message_lock_icon").exists():
+    print("MESSAGE SENT WITHOUT ANY LAG")
+else:
+    print("MESSAGE SENT WITH ANY LAG")
