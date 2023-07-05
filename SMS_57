@@ -1,0 +1,17 @@
+import uiautomator2 as ui2
+import time
+
+# Connect to the device
+receiver_device_serial = "192.168.168.16:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+
+receiver_device(scrollable=True).scroll.toEnd(20)
+time.sleep(2)
+receiver_device(scrollable=True).scroll.toEnd(10)
+time.sleep(2)
+receiver_device(text="OfficeSuite").click()
+time.sleep(2)
+if receiver_device(text="Getting_Started.pdf").exists():
+    print("Pdf available")
+else:
+    print("Pdf not available")
