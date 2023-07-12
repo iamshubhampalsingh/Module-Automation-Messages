@@ -1,0 +1,23 @@
+# Import necessary modules
+import uiautomator2 as ui2
+import time
+import subprocess
+
+receiver_device_serial = "192.168.155.53:5555"
+
+# Create a Device object for the receiver device
+receiver_device = ui2.Device(receiver_device_serial)
+
+# Compose the message
+receiver_device(text="Messages").click()
+time.sleep(2)
+receiver_device(resourceId="com.google.android.apps.messaging:id/searchbar").click()
+time.sleep(2)
+receiver_device(resourceId="com.google.android.apps.messaging:id/zero_state_search_box_auto_complete").set_text("Shubham")
+time.sleep(2)
+receiver_device.xpath('//*[@resource-id="com.google.android.inputmethod.latin:id/key_pos_ime_action"]/android.widget.FrameLayout[1]/android.widget.ImageView[1]').click()
+time.sleep(2)
+if receiver_device(resourceId="com.google.android.apps.messaging:id/conversation_name", text="Shubham").exists():
+  print("Contacts can be found")
+else:
+  print("Contacts cannot be found")
