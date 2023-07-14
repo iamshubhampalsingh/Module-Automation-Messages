@@ -1,0 +1,51 @@
+import uiautomator2 as ui2
+import time
+import subprocess
+
+# Connect to the devices
+receiver_device_serial = "192.168.168.16:5555"
+receiver_device = ui2.Device(receiver_device_serial)
+
+# Create a Device object for the sender device
+sender_device = ui2.Device('cf611ff9')
+
+time.sleep(2)
+receiver_device(text="Messages").click()
+time.sleep(2)
+receiver_device(text="Start chat").click()
+time.sleep(2)
+receiver_device.xpath('//android.widget.ScrollView').click()
+time.sleep(2)
+receiver_device.xpath('//android.widget.ScrollView').set_text("Shubham")
+time.sleep(2)
+receiver_device(text="Shubham").click()
+time.sleep(2)
+receiver_device(text="RCS message").set_text("THISISSHUBHAMPALSINGH")
+time.sleep(2)
+receiver_device(resourceId="com.google.android.apps.messaging:id/send_message_button_container").click()
+time.sleep(2)
+receiver_device.press("home")
+time.sleep(2)
+if receiver_device(resourceId="com.google.android.apps.messaging:id/status_icon").exists():
+ print("Delivery report is seen")
+else:
+ print("Delivery report is not seen")
+time.sleep(10)
+# Package name and activity for Gmail
+package_name = "com.google.android.gm"
+activity_name = "com.google.android.gm.ConversationListActivityGmail"
+
+# Start Gmail
+sender_device.app_start(package_name, activity_name)
+time.sleep(2)
+sender_device(resourceId="com.google.android.gm:id/compose_button").click()
+time.sleep(2)
+sender_device.xpath('//*[@resource-id="com.google.android.gm:id/peoplekit_autocomplete_chip_group"]/android.widget.EditText[1]').set_text("shubhampalsingh385@gmail.com")
+time.sleep(2)
+sender_device.xpath('//*[@resource-id="com.google.android.gm:id/peoplekit_listview_flattened_row"]/android.widget.RelativeLayout[2]').click()
+time.sleep(2)
+sender_device.xpath('//*[@resource-id="com.google.android.gm:id/wc_body_layout"]/android.webkit.WebView[1]').click()
+time.sleep(2)
+sender_device(resourceId="com.google.android.gm:id/body_wrapper").set_text("hello")
+time.sleep(2)
+sender_device(resourceId="com.google.android.gm:id/send").click()
