@@ -1,0 +1,40 @@
+import uiautomator2 as ui2
+import time
+
+# Device serial number of the receiver device
+receiver_device_serial = "192.168.168.16:5555"
+
+# Create a Device object for the receiver device
+receiver_device = ui2.Device(receiver_device_serial)
+
+# Define the initial swipe coordinates
+start_x = 500
+start_y = 500
+end_y = 1500
+swipe_duration = 0.5
+
+# Perform multiple swipes to scroll the screen downwards
+num_swipes = 5
+for _ in range(num_swipes):
+    receiver_device.swipe(start_x, start_y, start_x, end_y, duration=swipe_duration)
+    time.sleep(1)
+
+# Open the Settings app
+receiver_device.app_start("com.android.settings")
+time.sleep(2)
+receiver_device(resourceId="com.android.settings:id/search_action_bar").set_text("guest")
+time.sleep(2)
+receiver_device.xpath('//*[@resource-id="com.android.settings.intelligence:id/list_results"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]').click()
+time.sleep(2)
+receiver_device(resourceId="android:id/switch_widget").click()
+time.sleep(2)
+receiver_device.xpath('//*[@resource-id="com.android.settings:id/list"]/android.widget.LinearLayout[2]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]').click()
+time.sleep(5)
+receiver_device.xpath('//*[@resource-id="com.android.settings:id/list"]/android.widget.LinearLayout[1]/android.widget.LinearLayout[1]/android.widget.RelativeLayout[1]').click()
+time.sleep(5)
+# Define the package name and activity name of the Messaging app
+package_name = "com.android.mms"
+activity_name = "com.android.mms.ui.ConversationList"
+
+# ADB command to start the Messaging app
+receiver_device.app_start(package_name, activity_name)
